@@ -16,6 +16,7 @@ export default function Home() {
   const postsStatus = useSelector(getPostsStatus);
   const postsError = useSelector(getPostsError);
   const users = useSelector(selectAllUsers);
+  const singlePost = useSelector((state) => selectPostById(state, 1));
   const dispatch = useDispatch();
 
   console.log("posts", posts);
