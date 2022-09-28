@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectPostById } from "../../features/posts/postsSlice";
+import { selectPostById, deletePost } from "../../features/posts/postsSlice";
 import { useRouter } from "next/router";
 
 const PostDetail = () => {
