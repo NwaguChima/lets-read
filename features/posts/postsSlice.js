@@ -7,6 +7,11 @@ export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   return response.data;
 });
 
+export const addNewPost = createAsyncThunk("posts/addNewPost", async (post) => {
+  const response = await axios.post(POST_URL, post);
+  return response.data;
+});
+
 const initialState = {
   posts: [
     {
@@ -66,6 +71,9 @@ export const postsSlice = createSlice({
       .addCase(fetchPosts.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+      .addCase(addNewPost.fulfilled, (state, action) => {
+        state.posts.push(action.payload);
       });
   },
 });
