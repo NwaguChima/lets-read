@@ -1,29 +1,21 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   addPost,
   removePost,
   selectAllPosts,
   getPostsStatus,
   getPostsError,
-  fetchPosts,
 } from "../features/posts/postsSlice";
 
 export default function Home() {
   const posts = useSelector(selectAllPosts);
   const postsStatus = useSelector(getPostsStatus);
   const postsError = useSelector(getPostsError);
-  const dispatch = useDispatch();
 
   console.log("posts", posts);
-
-  useEffect(() => {
-    if (postsStatus === "idle") {
-      dispatch(fetchPosts());
-    }
-  }, [postsStatus, dispatch]);
 
   return (
     <div>
