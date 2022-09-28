@@ -1,10 +1,19 @@
 import Head from "next/head";
 import { useSelector, useDispatch } from "react-redux";
-import { addPost, removePost } from "../features/post/postSlice";
+import {
+  addPost,
+  removePost,
+  selectAllPosts,
+} from "../features/posts/postsSlice";
+import { getUsers, selectAllUsers } from "../features/users/usersSlice";
 
 export default function Home() {
-  const post = useSelector((state) => state.post);
+  const posts = useSelector(selectAllPosts);
+  const users = useSelector(selectAllUsers);
   const dispatch = useDispatch();
+
+  console.log("posts", posts);
+  console.log("users", users);
 
   return (
     <div>
@@ -15,16 +24,17 @@ export default function Home() {
       </Head>
 
       <main className="text-3xl">
-        {post.posts.map((post) => (
+        {posts.map((post) => (
           <div key={post.id}>
             <h1>{post.title}</h1>
+            <p>{users[0].name}</p>
           </div>
         ))}
         <div>
-          <button onClick={() => dispatch(addPost({ id: 1, title: "Hello" }))}>
+          <button onClick={() => dispatch(addPost({ id: 2, title: "Hello" }))}>
             AddPost
           </button>
-          <button onClick={() => dispatch(removePost(1))}>RemovePost</button>
+          <button onClick={() => dispatch(removePost(2))}>RemovePost</button>
         </div>
       </main>
 
