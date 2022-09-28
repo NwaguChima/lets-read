@@ -31,24 +31,6 @@ export const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    addPost: {
-      reducer(state, action) {
-        // emmerjs is used to mutate the state, hence allows for push
-        state.posts.push(action.payload);
-      },
-      prepare(id, title, content, userId) {
-        return {
-          payload: {
-            id,
-            title,
-            content,
-            date: new Date().toISOString(),
-            userId,
-            comments: [],
-          },
-        };
-      },
-    },
     addComment: (state, action) => {
       const { postId, comment } = action.payload;
       const post = state.posts.find((post) => post.id === postId);
