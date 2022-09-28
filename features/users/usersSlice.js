@@ -1,11 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
-const initialState = [
-  {
-    id: 1,
-    name: "John Doe",
-  },
-];
+const USER_URL = "https://jsonplaceholder.typicode.com/users";
+
+const initialState = [];
+
+export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
+  const response = await axios.get(USER_URL);
+  return response.data;
+});
 
 export const usersSlice = createSlice({
   name: "users",
@@ -15,6 +18,11 @@ export const usersSlice = createSlice({
       // emmerjs is used to mutate the state, hence allows for push
       state.push(action.payload);
     },
+  },
+  extraReducers(builder) {
+    builder.addCase(fetchUsers.fulfilled, (state, action) => {
+      return action.payload;
+    });
   },
 });
 

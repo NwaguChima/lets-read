@@ -1,19 +1,31 @@
 import Head from "next/head";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addPost,
   removePost,
   selectAllPosts,
+  getPostsStatus,
+  getPostsError,
+  fetchPosts,
 } from "../features/posts/postsSlice";
 import { getUsers, selectAllUsers } from "../features/users/usersSlice";
 
 export default function Home() {
   const posts = useSelector(selectAllPosts);
+  const postsStatus = useSelector(getPostsStatus);
+  const postsError = useSelector(getPostsError);
   const users = useSelector(selectAllUsers);
   const dispatch = useDispatch();
 
   console.log("posts", posts);
   console.log("users", users);
+
+  useEffect(() => {
+    if (postsStatus === "idle") {
+      dispatch(fetchPosts());
+    }
+  }, [postsStatus, dispatch]);
 
   return (
     <div>
@@ -27,7 +39,7 @@ export default function Home() {
         {posts.map((post) => (
           <div key={post.id}>
             <h1>{post.title}</h1>
-            <p>{users[0].name}</p>
+            {/* <p>{users[0].name}</p> */}
           </div>
         ))}
         <div>
