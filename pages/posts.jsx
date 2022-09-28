@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -16,12 +17,9 @@ export default function Home() {
   const posts = useSelector(selectAllPosts);
   const postsStatus = useSelector(getPostsStatus);
   const postsError = useSelector(getPostsError);
-  const users = useSelector(selectAllUsers);
-  const singlePost = useSelector((state) => selectPostById(state, 1));
   const dispatch = useDispatch();
 
   console.log("posts", posts);
-  console.log("users", users);
 
   useEffect(() => {
     if (postsStatus === "idle") {
@@ -40,7 +38,9 @@ export default function Home() {
       <main className="text-3xl">
         {posts.map((post) => (
           <div key={post.id}>
-            <h1>{post.title}</h1>
+            <Link href={`/posts/${post.id}`}>
+              <h1>{post.title}</h1>
+            </Link>
             {/* <p>{users[0].name}</p> */}
           </div>
         ))}

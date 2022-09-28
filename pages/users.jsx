@@ -1,7 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { selectAllUsers } from "../features/users/usersSlice";
 
-const users = () => {
+const Users = () => {
+  const users = useSelector(selectAllUsers);
+  console.log("users", users);
+
   return <div>users</div>;
 };
 
-export default users;
+export default Users;

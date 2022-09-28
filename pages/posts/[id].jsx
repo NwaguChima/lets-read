@@ -1,7 +1,19 @@
 import React from "react";
+import useParams from "next";
+import { useSelector } from "react-redux";
+import { selectPostById } from "../../features/posts/postsSlice";
+import { useRouter } from "next/router";
 
-const postDetail = () => {
+const PostDetail = () => {
+  // get param from url
+  const router = useRouter();
+  const { id } = router.query;
+  const singlePost = useSelector((state) => selectPostById(state, Number(id)));
+
+  console.log("id", id);
+  console.log("singlePost", singlePost);
+
   return <div>Hello details.....</div>;
 };
 
-export default postDetail;
+export default PostDetail;

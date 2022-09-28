@@ -13,15 +13,7 @@ export const addNewPost = createAsyncThunk("posts/addNewPost", async (post) => {
 });
 
 const initialState = {
-  posts: [
-    {
-      id: 1,
-      title: "Hello",
-      content: "Hello World",
-      userId: 1,
-      comments: [],
-    },
-  ],
+  posts: [],
   status: "idle", // idle, loading, failed
   error: null,
 };
@@ -83,6 +75,9 @@ export const { addPost, removePost, addComment } = postsSlice.actions;
 export const selectAllPosts = (state) => state.posts.posts;
 export const getPostsStatus = (state) => state.posts.status;
 export const getPostsError = (state) => state.posts.error;
-export const selectPostById = (state, postId) =>
-  state.posts.posts.find((post) => post.id === postId);
+export const selectPostById = (state, postId) => {
+  console.log("======", postId, state);
+  return state.posts.posts.find((post) => post.id === postId);
+};
+
 export default postsSlice.reducer;
