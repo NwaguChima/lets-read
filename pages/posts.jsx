@@ -9,9 +9,7 @@ import {
   getPostsStatus,
   getPostsError,
   fetchPosts,
-  selectPostById,
 } from "../features/posts/postsSlice";
-import { getUsers, selectAllUsers } from "../features/users/usersSlice";
 
 export default function Home() {
   const posts = useSelector(selectAllPosts);

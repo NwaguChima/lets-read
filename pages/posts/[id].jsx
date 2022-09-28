@@ -1,5 +1,4 @@
 import React from "react";
-import useParams from "next";
 import { useSelector } from "react-redux";
 import { selectPostById } from "../../features/posts/postsSlice";
 import { useRouter } from "next/router";
