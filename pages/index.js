@@ -1,6 +1,11 @@
 import Head from "next/head";
+import { useSelector, useDispatch } from "react-redux";
+import { addPost, removePost } from "../features/post/postSlice";
 
 export default function Home() {
+  const post = useSelector((state) => state.post);
+  const dispatch = useDispatch();
+
   return (
     <div>
       <Head>
@@ -9,7 +14,19 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="text-3xl">Hello app</main>
+      <main className="text-3xl">
+        {post.posts.map((post) => (
+          <div key={post.id}>
+            <h1>{post.title}</h1>
+          </div>
+        ))}
+        <div>
+          <button onClick={() => dispatch(addPost({ id: 1, title: "Hello" }))}>
+            AddPost
+          </button>
+          <button onClick={() => dispatch(removePost(1))}>RemovePost</button>
+        </div>
+      </main>
 
       <footer></footer>
     </div>
