@@ -1,4 +1,8 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  createAsyncThunk,
+  createSelector,
+} from "@reduxjs/toolkit";
 import axios from "axios";
 import { sub } from "date-fns";
 const POST_URL = "https://jsonplaceholder.typicode.com/posts";
@@ -82,14 +86,18 @@ export const postsSlice = createSlice({
   },
 });
 
-export const { addPost, removePost, addComment } = postsSlice.actions;
+export const { removePost, addComment } = postsSlice.actions;
 
 export const selectAllPosts = (state) => state.posts.posts;
 export const getPostsStatus = (state) => state.posts.status;
 export const getPostsError = (state) => state.posts.error;
-export const selectPostById = (state, postId) => {
-  console.log("======", postId, state);
-  return state.posts.posts.find((post) => post.id === postId);
-};
+export const selectPostById = (state, postId) =>
+  state.posts.posts.find((post) => post.id === postId);
+
+// memoized selector to get posts by user and avoid re-rendering of components
+export const selectPostsByUser = createSelector(
+  [selectAllPosts, (state, userId) => userId],
+  (posts, userId) => posts.filter((post) => post.userId === userId)
+);
 
 export default postsSlice.reducer;
