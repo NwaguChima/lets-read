@@ -31,7 +31,7 @@ export default function Home() {
           </div>
         ))}
         <div>
-          <button onClick={() => dispatch(addPost({ id: 2, title: "Hello" }))}>
+          <button onClick={() => dispatch(addPost(2, "Hello", "content", 2))}>
             AddPost
           </button>
           <button onClick={() => dispatch(removePost(2))}>RemovePost</button>
