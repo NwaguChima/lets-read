@@ -1,4 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+const POST_URL = "https://jsonplaceholder.typicode.com/posts";
+
+export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
+  const response = await axios.get(POST_URL);
+  return response.data;
+});
 
 const initialState = {
   posts: [
@@ -46,6 +53,20 @@ export const postsSlice = createSlice({
       // emmerjs is used to mutate the state, hence allows for filter
       state.posts = state.posts.filter((post) => post.id !== action.payload);
     },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchPosts.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(fetchPosts.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.posts = action.payload;
+      })
+      .addCase(fetchPosts.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
   },
 });
 
