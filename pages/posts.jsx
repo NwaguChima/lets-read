@@ -1,21 +1,22 @@
 import Head from "next/head";
-import Link from "next/link";
-import { useEffect } from "react";
+// import Link from "next/link";
 import { useSelector } from "react-redux";
+import PostCard from "../components/postCard";
 import {
-  addPost,
   removePost,
+  selectPostIds,
   selectAllPosts,
   getPostsStatus,
   getPostsError,
 } from "../features/posts/postsSlice";
 
 export default function Home() {
-  const posts = useSelector(selectAllPosts);
+  const orderedPosts = useSelector(selectAllPosts);
+
   const postsStatus = useSelector(getPostsStatus);
   const postsError = useSelector(getPostsError);
 
-  console.log("posts", posts);
+  // console.log("posts", orderedPostIds);
 
   return (
     <div>
@@ -26,20 +27,11 @@ export default function Home() {
       </Head>
 
       <main className="text-3xl">
-        {posts.map((post) => (
-          <div key={post.id}>
-            <Link href={`/posts/${post.id}`}>
-              <h1>{post.title}</h1>
-            </Link>
-            {/* <p>{users[0].name}</p> */}
-          </div>
-        ))}
-        <div>
-          <button onClick={() => dispatch(addPost(2, "Hello", "content", 2))}>
-            AddPost
-          </button>
-          <button onClick={() => dispatch(removePost(2))}>RemovePost</button>
-        </div>
+        <section>
+          {orderedPosts.map((postId) => (
+            <PostCard postId={postId} key={postId} />
+          ))}
+        </section>
       </main>
 
       <footer></footer>
