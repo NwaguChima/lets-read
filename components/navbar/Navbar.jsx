@@ -15,7 +15,7 @@ const Navbar = () => {
                     <div>
                         <div className="flex items-center justify-between py-3 md:py-5 md:block">
                             <a href="#">
-                                
+
                                 <h2 className="text-2xl text-white font-bold">POSTS</h2>
                             </a>
                             <div className="md:hidden">
@@ -24,10 +24,10 @@ const Navbar = () => {
                                     onClick={() => setNavBar(!navbar)}
                                 >
                                     {navbar ? (
-                                        // <Image className="w-6 h-6 text-white" src={blog} alt="logo" />
+
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
-                                            className="w-6 h-6 text-black"
+                                            className="w-6 h-6 text-gray-400"
                                             viewBox="0 0 20 20"
                                             fill="currentColor"
                                         >
@@ -38,10 +38,10 @@ const Navbar = () => {
                                             />
                                         </svg>
                                     ) : (
-                                                //    <Image className="w-6 h-6 text-white" src={blog} alt="logo" />
+                                        //    <Image className="w-6 h-6 text-white" src={blog} alt="logo" />
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
-                                            className="w-6 h-6 text-black"
+                                            className="w-6 h-6 text-white"
                                             fill="none"
                                             viewBox="0 0 24 24"
                                             stroke="currentColor"
@@ -79,7 +79,7 @@ const Navbar = () => {
                                         <a>Users</a>
                                     </Link>
                                 </li>
-                              
+
                             </ul>
                         </div>
                     </div>
@@ -91,7 +91,7 @@ const Navbar = () => {
                 </h1>
             </div> */}
         </div>
-      
+
     );
 }
 
