@@ -1,8 +1,11 @@
-const PostCard = ({ postId }) => {
-  // const post = useSelector((state) => selectPostById(state, postId));
-  //   console.log("post====>>>>", post);
+import { useSelector } from "react-redux";
+import { selectPostById } from "../features/posts/postsSlice";
 
-  return <p>Hello</p>;
+const PostCard = ({ post }) => {
+  // const post = useSelector((state) => selectPostById(state, post));
+  console.log("post***", post);
+
+  return <p>zzzfxxxzx</p>;
 };
 
 export default PostCard;

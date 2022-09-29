@@ -1,20 +1,26 @@
 import Head from "next/head";
+import { useEffect, useState } from "react";
 // import Link from "next/link";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import PostCard from "../components/postCard";
-import {
-  removePost,
-  selectPostIds,
-  selectAllPosts,
-} from "../features/posts/postsSlice";
+// import { selectPostIds, selectAllPosts } from "../features/posts/postsSlice";
 import { useGetPostsQuery } from "../features/posts/postsSlice";
 
 export default function Home() {
-  const orderedPosts = useSelector(selectPostIds);
+  const [postData, setPostData] = useState(null);
+  const {
+    isSuccess,
+    error,
+    isLoading,
+    isError,
+    data: posts,
+  } = useGetPostsQuery();
 
-  const { isSuccess, error, isLoading, isError } = useGetPostsQuery();
+  useEffect(() => {
+    setPostData(posts);
+  }, [posts]);
 
-  console.log("posts", orderedPosts);
+  // console.log("posts", postData);
 
   return (
     <div>
@@ -26,9 +32,13 @@ export default function Home() {
 
       <main className="text-3xl">
         <section>
-          {/* {orderedPosts.map((postId) => (
-            <PostCard postId={postId} key={postId} />
-          ))} */}
+          {/* {postData &&
+            postData.map((post) => <PostCard key={post.id} post={post} />)} */}
+
+          {!isLoading &&
+            postData?.ids.map((postId) => (
+              <PostCard key={postId} post={postData.entities[postId]} />
+            ))}
         </section>
       </main>
 

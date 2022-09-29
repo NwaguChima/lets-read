@@ -1,14 +1,22 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectPostsByUser } from "../features/posts/postsSlice";
 import { selectAllUsers } from "../features/users/usersSlice";
+import {
+  useGetPostsByUserIdQuery,
+  selectPostById,
+} from "../features/posts/postsSlice";
 
 const Users = () => {
   const users = useSelector(selectAllUsers);
 
-  const postsForUser = useSelector((state) => selectPostsByUser(state, 1));
-  console.log("postsForUser", postsForUser);
-  console.log("users", users);
+  const {
+    isSuccess,
+    error,
+    isLoading,
+    isError,
+    data: postsForUser,
+  } = useGetPostsByUserIdQuery(1);
+  console.log("users=====>", postsForUser);
 
   return <div>users</div>;
 };

@@ -49,10 +49,65 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         return [...result.ids.map((id) => ({ type: "Post", id }))];
       },
     }),
+
+    addNewPost: builder.mutation({
+      query: (initialPost) => ({
+        url: "/posts",
+        method: "POST",
+        body: {
+          ...initialPost,
+          userId: Number(initialPost.userId),
+          date: new Date().toISOString(),
+          comments: [],
+        },
+      }),
+      invalidatesTags: [{ type: "Post", id: "LIST" }],
+    }),
+
+    deletePost: builder.mutation({
+      query: (id) => ({
+        url: `/posts/${id}`,
+        method: "DELETE",
+        body: { id },
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: "Post", id: arg.id }],
+    }),
+
+    addComment: builder.mutation({
+      query: ({ postId, comment }) => ({
+        url: `/posts/${postId}`,
+        method: "PATCH",
+        body: comment,
+      }),
+      async onQueryStarted({ postId, comment }, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          extendedApiSlice.util.updateQueryData(
+            "getPosts",
+            undefined,
+            (draft) => {
+              const post = draft.entities[postId];
+              if (post) post.comments = [...post.comments, comment];
+            }
+          )
+        );
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
+    }),
   }),
+  overrideExisting: true,
 });
 
-export const { useGetPostsQuery } = extendedApiSlice;
+export const {
+  useGetPostsQuery,
+  useGetPostsByUserIdQuery,
+  useAddNewPostMutation,
+  useDeletePostMutation,
+  useAddCommentMutation,
+} = extendedApiSlice;
 
 // returns the query result object
 export const selectPostsResult = extendedApiSlice.endpoints.getPosts.select();
