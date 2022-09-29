@@ -5,10 +5,16 @@ import Navbar from '../navbar/Navbar'
 
 const Layout = ({ children }) => {
     return (
-        <div>
+        <div className=''>
             <Navbar />
-            {children}
-            <Footer />
+            <div>
+
+                {children}
+            </div>
+
+            <div className='absolute inset-x-0 h-16 mt-auto'>
+                <Footer />
+            </div>
         </div>
     )
 }
