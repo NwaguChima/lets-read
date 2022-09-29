@@ -22,26 +22,51 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 
           return post;
         });
+
+        return postsAdapter.setAll(initialState, loadedPosts);
+      },
+      providesTags: (result, error, arg) => [
+        { type: "Post", id: "LIST" },
+        ...result.ids.map(({ id }) => ({ type: "Post", id })),
+      ],
+    }),
+
+    getPostsByUserId: builder.query({
+      query: (userId) => `posts?userId=${userId}`,
+      transformResponse: (responseData) => {
+        let min = 1;
+        const loadedPosts = responseData.map((post) => {
+          if (!post?.data)
+            post.date = sub(new Date(), { minutes: min++ }).toISOString();
+          if (!post?.comments) post.comments = [];
+
+          return post;
+        });
+
+        return postsAdapter.setAll(initialState, loadedPosts);
+      },
+      providesTags: (result, error, arg) => {
+        return [...result.ids.map((id) => ({ type: "Post", id }))];
       },
     }),
   }),
 });
 
-export const { addComment } = postsSlice.actions;
+export const { useGetPostsQuery } = extendedApiSlice;
+
+// returns the query result object
+export const selectPostsResult = extendedApiSlice.endpoints.getPosts.select();
+
+// creates memoized selector
+const selectPostsData = createSelector(
+  selectPostsResult,
+  (postsResult) => postsResult.data
+);
 
 export const {
   selectAll: selectAllPosts,
   selectById: selectPostById,
   selectIds: selectPostIds,
-} = postsAdapter.getSelectors((state) => state.posts);
-
-export const getPostsStatus = (state) => state.posts.status;
-export const getPostsError = (state) => state.posts.error;
-
-// memoized selector to get posts by user and avoid re-rendering of components
-export const selectPostsByUser = createSelector(
-  [selectAllPosts, (state, userId) => userId],
-  (posts, userId) => posts.filter((post) => post.userId === userId)
+} = postsAdapter.getSelectors(
+  (state) => selectPostsData(state) ?? initialState
 );
-
-export default postsSlice.reducer;

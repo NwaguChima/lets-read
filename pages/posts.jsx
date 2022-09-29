@@ -6,17 +6,15 @@ import {
   removePost,
   selectPostIds,
   selectAllPosts,
-  getPostsStatus,
-  getPostsError,
 } from "../features/posts/postsSlice";
+import { useGetPostsQuery } from "../features/posts/postsSlice";
 
 export default function Home() {
-  const orderedPosts = useSelector(selectAllPosts);
+  const orderedPosts = useSelector(selectPostIds);
 
-  const postsStatus = useSelector(getPostsStatus);
-  const postsError = useSelector(getPostsError);
+  const { isSuccess, error, isLoading, isError } = useGetPostsQuery();
 
-  // console.log("posts", orderedPostIds);
+  console.log("posts", orderedPosts);
 
   return (
     <div>
@@ -28,9 +26,9 @@ export default function Home() {
 
       <main className="text-3xl">
         <section>
-          {orderedPosts.map((postId) => (
+          {/* {orderedPosts.map((postId) => (
             <PostCard postId={postId} key={postId} />
-          ))}
+          ))} */}
         </section>
       </main>
 
