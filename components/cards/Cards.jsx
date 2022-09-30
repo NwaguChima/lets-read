@@ -3,26 +3,36 @@ import { data } from "../../data";
 import Link from "next/link";
 import { BsThreeDots } from "react-icons/bs";
 import { MdDeleteOutline } from "react-icons/md";
+import Moment from "react-moment";
+import { useDeletePostMutation } from "../../features/posts/postsSlice";
 
 const Cards = ({ post }) => {
-  let date = post.date;
+  const [deletePost] = useDeletePostMutation(post.id);
 
-  let newDate = new Date(date);
-  let formatDate = newDate.toLocaleDateString();
-  console.log("dd", formatDate);
-  const handleModal = () => {};
+  const handleDelete = async () => {
+    try {
+      await deletePost({ id: post.id }).unwrap();
+
+      console.log("======>>>>", post.id);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   return (
-    <div className="p-6 max-w-sm bg-white rounded-lg border shadow-md border-gray-300 max-h-80 ">
-      <h5 className="mb-2 text-lg lg:text-2xl font-bold tracking-tight text-gray-700 line-clamp-3">
+    <div className="p-6 max-w-md bg-white rounded-lg border shadow-md border-gray-300 max-h-80">
+      <h5 className="mb-2 text-lg lg:text-2xl font-bold tracking-tight text-gray-700 truncate uppercase">
         {post.title}
       </h5>
 
-      <p className="mb-3 text-base lg:text-lg font-normal text-gray-600 h-[40%] text-ellipsis overflow-hidden">
+      <p className="mb-3 text-base lg:text-lg font-normal text-gray-600 line-clamp-3">
         {post.body}
       </p>
 
       <div className="flex items-center justify-between">
-        <p className="flex text-xs	 text-gray-600 italic">{formatDate}</p>
+        <Moment fromNow className="flex text-xs	 text-gray-600 italic">
+          {post.date}
+        </Moment>
 
         <div>
           <p className="text-gray-500 text-xs">
@@ -30,9 +40,9 @@ const Cards = ({ post }) => {
           </p>
         </div>
       </div>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mt-5">
         <Link href={`/posts/${post.id}`}>
-          <p className="inline-flex  mt-3  items-center py-2 px-3 text-sm font-medium text-center text-white rounded-lg hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 bg-orange-600  ">
+          <p className="inline-flex   items-center py-2 px-3 text-sm font-medium text-center text-white rounded-lg hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 bg-orange-600  ">
             Read more
             <svg
               aria-hidden="true"
@@ -49,8 +59,8 @@ const Cards = ({ post }) => {
             </svg>
           </p>
         </Link>
-        <i className="text-red-500 mt-8">
-          <MdDeleteOutline onClick={handleModal} />
+        <i className="text-red-500">
+          <MdDeleteOutline onClick={handleDelete} />
         </i>
       </div>
     </div>

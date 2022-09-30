@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectAllUsers } from "../features/users/usersSlice";
+import { selectAllUsers, selectUserById } from "../features/users/usersSlice";
 import {
   useGetPostsByUserIdQuery,
   selectPostById,
@@ -8,6 +8,8 @@ import {
 
 const Users = () => {
   const users = useSelector(selectAllUsers);
+
+  console.log("users", users);
 
   const {
     isSuccess,

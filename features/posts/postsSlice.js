@@ -85,6 +85,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
             "getPosts",
             undefined,
             (draft) => {
+              console.log("***", postId, comment);
               const post = draft.entities[postId];
               if (post) post.comments = [...post.comments, comment];
             }
