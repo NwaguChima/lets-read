@@ -5,6 +5,7 @@ import {
   useGetPostsByUserIdQuery,
   selectPostById,
 } from "../features/posts/postsSlice";
+import UsersPage from "../components/users/UsersPage";
 
 const Users = () => {
   const users = useSelector(selectAllUsers);
@@ -17,7 +18,9 @@ const Users = () => {
     data: postsForUser,
   } = useGetPostsByUserIdQuery(1);
 
-  return <div>users</div>;
-};
+  return (
+    <div><UsersPage /></div>
+  )
+}
 
 export default Users;
