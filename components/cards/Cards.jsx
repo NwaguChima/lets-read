@@ -12,8 +12,6 @@ const Cards = ({ post }) => {
   const handleDelete = async () => {
     try {
       await deletePost({ id: post.id }).unwrap();
-
-      console.log("======>>>>", post.id);
     } catch (error) {
       console.log("error", error);
     }

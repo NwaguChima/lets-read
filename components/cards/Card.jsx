@@ -22,7 +22,6 @@ const Card = (props) => {
     // Fetch items from another resources.
     const endOffset = itemOffset + 10;
     const data = posts?.ids.slice(itemOffset, endOffset);
-    console.log("posts", data);
 
     setPostData(data);
     setPageCount(Math.ceil(posts.ids.length / 10));

@@ -8,7 +8,6 @@ import Layout from "../components/layout/Layout.jsx";
 
 // this is done to ensure users are gotten before the page is rendered
 store.dispatch(extendedApiSlice.endpoints.getPosts.initiate());
-// console.log("xxx", extendedApiSlice);
 store.dispatch(fetchUsers());
 
 function MyApp({ Component, pageProps }) {

@@ -10,9 +10,6 @@ const PostDetail = () => {
   const { id } = router.query;
   const singlePost = useSelector((state) => selectPostById(state, Number(id)));
 
-  console.log("id", id);
-  console.log("singlePost", singlePost);
-
   return <div>{singlePost && <PostDetails post={singlePost} />}</div>;
 };
 

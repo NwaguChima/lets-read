@@ -9,8 +9,6 @@ import {
 const Users = () => {
   const users = useSelector(selectAllUsers);
 
-  console.log("users", users);
-
   const {
     isSuccess,
     error,
@@ -18,7 +16,6 @@ const Users = () => {
     isError,
     data: postsForUser,
   } = useGetPostsByUserIdQuery(1);
-  console.log("users=====>", postsForUser);
 
   return <div>users</div>;
 };
