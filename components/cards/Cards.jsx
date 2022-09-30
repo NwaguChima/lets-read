@@ -16,25 +16,25 @@ const Cards = ({ post }) => {
     return (
         <>
       
-            <div className="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 ">
+            <div className="p-6 max-w-sm bg-white rounded-lg border border-gray-100 shadow-md dark:bg-gray-50 dark:border-gray-300 ">
 
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{post.title}</h5>
+                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-700">{post.title}</h5>
 
-                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{post.body}</p>
+                <p className="mb-3 font-normal text-gray-700 dark:text-gray-600">{post.body}</p>
 
                 <div className="flex items-center justify-between">
 
-                    <p className="flex text-xs	 dark:text-gray-400 italic">{formatDate}</p>
+                    <p className="flex text-xs	 dark:text-gray-600 italic">{formatDate}</p>
 
                     <div >
-                        <p className="dark:text-white">Comments: {post.comments.length}</p>
+                        <p className="dark:text-gray-500">Comments: {post.comments.length}</p>
                     </div>
                 </div>
                 <div className="flex items-center justify-between">
 
 
                     <Link href={`/posts/${post.id}`} >
-                        <p className="inline-flex  mt-3  items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-blue-800">
+                        <p className="inline-flex  mt-3  items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
 
                             Read more
                             <svg aria-hidden="true" className="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -42,7 +42,7 @@ const Cards = ({ post }) => {
                             </svg>
                         </p>
                     </Link>
-                    <i className="dark:text-white mt-8"><BsThreeDots onClick={handleModal} /></i>
+                    <i className="dark:text-red-500 mt-8"><MdDeleteOutline onClick={handleModal} /></i>
                 </div>
             </div>
         </>
