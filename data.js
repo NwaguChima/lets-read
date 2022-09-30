@@ -96,3 +96,13 @@ export const data = [
     comments: ["gggg", "hhhhh", "nice!!!", "awesome post"],
   },
 ];
+
+export const user = [
+  {
+    id: 1,
+    name: "",
+    email: "",
+    address: "",
+
+  }
+]
