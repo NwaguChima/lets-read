@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import { data } from "../../data";
+import React from "react";
 import Link from "next/link";
-import { BsThreeDots } from "react-icons/bs";
 import { MdDeleteOutline } from "react-icons/md";
 import Moment from "react-moment";
 import { useDeletePostMutation } from "../../features/posts/postsSlice";
@@ -12,10 +10,8 @@ const Cards = ({ post }) => {
   const handleDelete = async () => {
     try {
       await deletePost({ id: post.id }).unwrap();
-
-      console.log("======>>>>", post.id);
     } catch (error) {
-      console.log("error", error);
+      console.error("error", error);
     }
   };
 

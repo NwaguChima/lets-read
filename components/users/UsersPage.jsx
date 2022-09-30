@@ -1,9 +1,11 @@
 import React from 'react'
 import Table from '../table/Table'
 import { columns } from '../../shared/columns'
-import { user } from '../../data'
+import { selectAllUsers } from '../../features/users/usersSlice'
+import { useSelector } from "react-redux";
 
 const UsersPage = () => {
+  const users = useSelector(selectAllUsers);
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900">
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
@@ -11,7 +13,7 @@ const UsersPage = () => {
           <h1 className="text-xl font-semibold">Users</h1>
         </div>
         <div className="mt-4">
-          <Table columns={columns} data={user} />
+          <Table columns={columns} data={users} />
         </div>
       </main>
     </div>

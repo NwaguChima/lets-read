@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import Cards from "./Cards";
-import { data } from "../../data";
 import { useGetPostsQuery } from "../../features/posts/postsSlice";
-import Spinner from "../Spinner";
+import Spinner from "../../shared/Spinner";
 
 const Card = (props) => {
   const [postData, setPostData] = useState(null);
   const [pageCount, setPageCount] = useState(0);
-  const [itemOffset, setItemOffset] = useState(0);
+    const [itemOffset, setItemOffset] = useState(0);
 
   const {
     isSuccess,
@@ -25,7 +24,7 @@ const Card = (props) => {
     console.log("posts", data);
 
     setPostData(data);
-    setPageCount(Math.ceil(posts.ids.length / 10));
+    setPageCount(Math.ceil(posts?.ids.length / 10));
   }, [itemOffset, posts]);
 
   const handlePageClick = (event) => {
@@ -34,14 +33,20 @@ const Card = (props) => {
     setItemOffset(newOffset);
   };
 
-  return (
-    <section>
-      <div className="sm:grid  gap-y-5 gap-x-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  p-14 ">
-        {postData &&
-          postData.map((postId) => (
-            <Cards post={posts.entities[postId]} key={postId} />
-          ))}
-      </div>
+    return (
+    
+        
+        <section>
+        { isLoading? <div><Spinner/></div> : (
+        
+          
+            <div className="sm:grid  gap-y-5 gap-x-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  p-14 ">
+            {postData &&
+                postData.map((postId) => (
+                    <Cards post={posts.entities[postId]} key={postId} />
+                    ))}
+                    </div>
+            ) }
       <div className="flex">
         <ReactPaginate
           className="flex items-center justify-center gap-4 w-full"

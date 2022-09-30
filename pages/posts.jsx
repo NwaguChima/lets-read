@@ -1,18 +1,5 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
-import PostCard from "../components/postCard";
-import { useGetPostsQuery } from "../features/posts/postsSlice";
-import Link from "next/link";
 import Card from "../components/cards/Card";
-import Layout from "../components/layout/Layout";
-import { useSelector } from "react-redux";
-import {
-  addPost,
-  removePost,
-  selectAllPosts,
-  getPostsStatus,
-  getPostsError,
-} from "../features/posts/postsSlice";
 
 export default function Home() {
   return (

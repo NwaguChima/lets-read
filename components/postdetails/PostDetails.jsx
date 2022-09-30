@@ -24,7 +24,6 @@ const PostDetails = ({ post }) => {
       </div>
       <p className="text-xl text-gray-600">{post.body}</p>
       <h1 className="text-xl mt-6">Comments: </h1>
-      {/* <p className='mt-6'>9/28/2022</p> */}
       <div className="mt-6">
         {["hello world"].map((comment, index) => (
           <Comments comment={comment} key={index} />
