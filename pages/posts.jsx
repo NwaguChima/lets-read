@@ -1,9 +1,6 @@
 import Head from "next/head";
-import Link from "next/link";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Card from "../components/cards/Card";
-import Layout from "../components/layout/Layout";
 import {
   addPost,
   removePost,
@@ -27,26 +24,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-
-      <Card />
-      {/* <main className="text-3xl">
-        {posts.map((post) => (
-          <div key={post.id}>
-            <Link href={`/posts/${post.id}`}>
-              <h1>{post.title}</h1>
-            </Link>
-            <p>{users[0].name}</p>
-          </div>
-        ))}
-        <div>
-          <button onClick={() => dispatch(addPost(2, "Hello", "content", 2))}>
-            AddPost
-          </button>
-          <button onClick={() => dispatch(removePost(2))}>RemovePost</button>
-        </div>
-      </main> */}
-
-      <footer></footer>
+      <main>
+        <Card />
+      </main>
     </>
   );
 }
