@@ -100,9 +100,10 @@ export const data = [
 export const user = [
   {
     id: 1,
-    name: "",
-    email: "",
-    address: "",
-
-  }
-]
+    name: "John Doe",
+    email: "johndoe@gmail.com",
+    address: "Norberto Crossing",
+    website: "ala.org",
+    company: "Considine-Lockman",
+  },
+];
